@@ -1,3 +1,6 @@
+import okhttp3.Request;
+import okhttp3.Response;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,6 +75,10 @@ public class SimpleShell {
                     continue;
                 }
                 // you need to add a bunch more.
+
+                // create
+                // send message
+                //
 
                 //!! command returns the last command in history
                 if (list.get(list.size() - 1).equals("!!")) {
