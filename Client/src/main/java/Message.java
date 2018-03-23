@@ -14,6 +14,12 @@ public class Message {
         this.message = message;
     }
 
+    public Message (String fromid, String toid, String message){
+        this.fromid = fromid;
+        this.toid = toid;
+        this.message = message;
+    }
+
     public String getSequence() {
         return sequence;
     }

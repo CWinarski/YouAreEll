@@ -75,7 +75,7 @@ public class SimpleShell {
                 }
 
                 // messages
-                if (list.contains("messages")) {
+                if (list.contains("messages") && list.size() == 1) {
                     String results = webber.get_messages();
                     SimpleShell.prettyPrint(results);
                     continue;
@@ -91,7 +91,8 @@ public class SimpleShell {
                     webber.MakeURLCall("/ids","POST", newIdInfo);
                     continue;
                 }
-
+                    /// send githubId message to github id
+                if (list.contains("send") && list.size() == 4)
                 // create
                 // send message
                 //
