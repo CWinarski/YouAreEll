@@ -1,5 +1,5 @@
-import okhttp3.Request;
-import okhttp3.Response;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,11 +12,17 @@ public class SimpleShell {
 
 
     public static void prettyPrint(String output) {
-        // yep, make an effort to format things nicely, eh?
-        System.out.println(output);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try{
+            Object json = objectMapper.readValue(output, Object.class);
+            String prettyPrint = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+            System.out.println(prettyPrint);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public static void main(String[] args) throws java.io.IOException {
-
+        ObjectMapper objectMapper = new ObjectMapper();
         YouAreEll webber = new YouAreEll();
         String commandLine;
         BufferedReader console = new BufferedReader
@@ -62,7 +68,7 @@ public class SimpleShell {
                 // Specific Commands.
 
                 // ids
-                if (list.contains("ids")) {
+                if (list.contains("ids") && list.size() == 1) {
                     String results = webber.get_ids();
                     SimpleShell.prettyPrint(results);
                     continue;
@@ -75,6 +81,16 @@ public class SimpleShell {
                     continue;
                 }
                 // you need to add a bunch more.
+
+
+                if (list.contains("ids") && list.size() == 3){
+                    String name = list.get(1);
+                    String gitHubId = list.get(2);
+                    User newUserId = new User(name, gitHubId);
+                    String newIdInfo = objectMapper.writeValueAsString(newUserId);
+                    webber.MakeURLCall("/ids","POST", newIdInfo);
+                    continue;
+                }
 
                 // create
                 // send message

@@ -49,7 +49,6 @@ public class User {
                 "userid='" + userid + '\'' +
                 ", name='" + name + '\'' +
                 ", githubid='" + githubid + '\'' +
-                ", client=" + client +
                 '}';
     }
 }
